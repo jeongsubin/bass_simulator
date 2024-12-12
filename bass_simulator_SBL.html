@@ -229,40 +229,49 @@ function getFishingAdvice() {
 function getSeasonAdvice(season) {
   switch (season) {
     case '초봄': 
-      return `🌸 <strong>초봄</strong> - 수온이 낮아 배스의 움직임이 둔하기 때문에 바닥층을 집중 공략해야 합니다. 돌무더기, 나무 그늘 같은 은신처 주변을 천천히 공략하며, 바닥을 끌거나 가벼운 리프트 앤 폴 액션이 효과적입니다.<br>
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7초 스테이 유지</span><br>`;
+      return `🌸 <strong>초봄</strong> - 수온이 낮아 배스의 움직임이 둔하기 때문에 바닥층을 집중 공략해야 합니다. 돌무더기, 나무 그늘 같은 은신처 주변을 천천히 공략하며, 바닥을 끌거나 가벼운 리프트 앤 폴 액션이 효과적입니다.<br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7초 스테이 유지</span><br>`;
+      
     case '봄': 
-      return `🌿 <strong>봄</strong> - 수온이 상승하며 배스의 활동이 활발해지기 시작합니다. 수초나 산란장이 될만한 얕은 구역을 노리며, 리프트 앤 폴보다는 천천히 끌어주는 방식이 효과적입니다.<br>
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 4초 스테이 유지</span><br>`;
+      return `🌿 <strong>봄</strong> - 수온이 상승하며 배스의 활동이 활발해지기 시작합니다. 수초나 산란장이 될만한 얕은 구역을 노리며, 리프트 앤 폴보다는 천천히 끌어주는 방식이 효과적입니다.<br><span style="color: gray;"><strong>팁</strong> - 폴링 후 4초 스테이 유지</span><br>`;
+
     case '늦봄': 
-      return `🌞 <strong>늦봄</strong> - 산란 직후 회복기인 배스를 노리기 위해 얕은 수심의 수초 주변과 섈로우 지역을 공략합니다. 회복 중인 배스는 공격성이 강하지 않으므로 천천히 자연스러운 액션을 유지하는 것이 좋습니다.<br>
+      return `🌞 <strong>늦봄</strong> - 산란 직후 회복기인 배스를 노리기 위해 얕은 수심의 수초 주변과 섈로우 지역을 공략합니다. 회복 중인 배스는 공격성이 강하지 않으므로 천천히 자연스러운 액션을 유지하는 것이 좋습니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br>`;
+
     case '초여름': 
-      return `🔥 <strong>초여름</strong> - 수온이 상승해 배스의 피딩 패턴이 왕성해지는 시기입니다. 넓은 구역을 탐색하며 중층과 얕은 수심의 구조물, 피딩존을 빠른 속도로 공략하는 것이 효과적입니다.<br>
+      return `🔥 <strong>초여름</strong> - 수온이 상승해 배스의 피딩 패턴이 왕성해지는 시기입니다. 넓은 구역을 탐색하며 중층과 얕은 수심의 구조물, 피딩존을 빠른 속도로 공략하는 것이 효과적입니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br>`;
+
     case '여름': 
-      return `🥵 <strong>여름</strong> - 더운 날씨로 인해 배스가 그늘진 피딩존에 모이기 쉽습니다. 피딩존과 급격한 수심 변화가 있는 구간을 매우 빠른 속도로 공략하며 공격성을 유도하는 것이 핵심입니다.<br>
+      return `🥵 <strong>여름</strong> - 더운 날씨로 인해 배스가 그늘진 피딩존에 모이기 쉽습니다. 피딩존과 급격한 수심 변화가 있는 구간을 매우 빠른 속도로 공략하며 공격성을 유도하는 것이 핵심입니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 1~2초 스테이 유지</span><br>`;
+
     case '늦여름': 
-      return `🍂 <strong>늦여름</strong> - 수온이 약간 떨어지며 배스의 위치가 깊은 수심으로 이동하는 경향이 있습니다. 수중 구조물과 급경사 지역을 중점적으로 공략하며 천천히 운용하는 것이 효과적입니다.<br>
+      return `🍂 <strong>늦여름</strong> - 수온이 약간 떨어지며 배스의 위치가 깊은 수심으로 이동하는 경향이 있습니다. 수중 구조물과 급경사 지역을 중점적으로 공략하며 천천히 운용하는 것이 효과적입니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br>`;
+
     case '초가을': 
-      return `🍁 <strong>초가을</strong> - 배스의 피딩이 활발해지는 시기로, 피딩존을 빠른 속도로 공략합니다. 얕은 수심의 피딩존과 섈로우 지역을 빠르게 탐색하며 루어의 존재감을 강하게 어필하는 것이 좋습니다.<br>
+      return `🍁 <strong>초가을</strong> - 배스의 피딩이 활발해지는 시기로, 피딩존을 빠른 속도로 공략합니다. 얕은 수심의 피딩존과 섈로우 지역을 빠르게 탐색하며 루어의 존재감을 강하게 어필하는 것이 좋습니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br>`;
+
     case '가을': 
-      return `🍂 <strong>가을</strong> - 배스가 먹이활동에 집중하는 피딩 시즌으로, 피딩존 근처의 변화 지형을 공략하는 것이 핵심입니다. 지형 변화를 활용해 자연스러운 폴링 액션을 유지하며 중간 속도로 운용합니다.<br>
+      return `🍂 <strong>가을</strong> - 배스가 먹이활동에 집중하는 피딩 시즌으로, 피딩존 근처의 변화 지형을 공략하는 것이 핵심입니다. 지형 변화를 활용해 자연스러운 폴링 액션을 유지하며 중간 속도로 운용합니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3~4초 스테이 유지</span><br>`;
+
     case '늦가을': 
-      return `🍁 <strong>늦가을</strong> - 수온이 급격히 떨어지면서 배스가 바닥층으로 이동합니다. 얕은 곳보다는 수심이 깊은 바닥 구간을 느린 속도로 공략하며, 자연스러운 바닥 끌기 액션이 효과적입니다.<br>
+      return `🍁 <strong>늦가을</strong> - 수온이 급격히 떨어지면서 배스가 바닥층으로 이동합니다. 얕은 곳보다는 수심이 깊은 바닥 구간을 느린 속도로 공략하며, 자연스러운 바닥 끌기 액션이 효과적입니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7~10초 스테이 유지</span><br>`;
+
     case '초겨울': 
-      return `❄️ <strong>초겨울</strong> - 수온 하락으로 인해 배스의 활동이 둔화됩니다. 바닥에 머무는 배스를 공략하기 위해 매우 느린 속도로 바닥을 끌거나 리프트 앤 폴 액션을 유지하는 것이 좋습니다.<br>
+      return `❄️ <strong>초겨울</strong> - 수온 하락으로 인해 배스의 활동이 둔화됩니다. 바닥에 머무는 배스를 공략하기 위해 매우 느린 속도로 바닥을 끌거나 리프트 앤 폴 액션을 유지하는 것이 좋습니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 스테이 유지</span><br>`;
+
     case '겨울': 
-      return `☃️ <strong>겨울</strong> - 수온이 최저점에 이르러 배스의 활동이 극도로 둔화됩니다. 깊은 수심의 바닥을 중심으로 공략하며, 루어를 거의 움직이지 않고 긴 스테이를 유지하는 것이 효과적입니다.<br>
+      return `☃️ <strong>겨울</strong> - 수온이 최저점에 이르러 배스의 활동이 극도로 둔화됩니다. 깊은 수심의 바닥을 중심으로 공략하며, 루어를 거의 움직이지 않고 긴 스테이를 유지하는 것이 효과적입니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 15초 스테이 유지</span><br>`;
+
     case '늦겨울': 
-      return `❄️ <strong>늦겨울</strong> - 수온이 약간 상승하면서 중층과 바닥 사이를 오가는 배스의 움직임이 포착됩니다. 리프트 앤 폴 액션으로 중층을 탐색한 후 바닥으로 전환하여 공략합니다.<br>
+      return `❄️ <strong>늦겨울</strong> - 수온이 약간 상승하면서 중층과 바닥 사이를 오가는 배스의 움직임이 포착됩니다. 리프트 앤 폴 액션으로 중층을 탐색한 후 바닥으로 전환하여 공략합니다.
               <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 스테이 유지</span><br>`;
     default: 
       return '';
