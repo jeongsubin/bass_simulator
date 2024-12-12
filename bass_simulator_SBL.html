@@ -122,7 +122,7 @@
 
 <div class="container">
 
-  <label for="season">현재 계절은?</label>
+  <label for="season">지금은 어떤 계절인가요?</label>
   <select id="season">
     <option value="선택 없음">선택 없음</option>
     <option value="초봄">초봄</option>
@@ -155,6 +155,19 @@
     <option value="댐 직벽 구간">댐 직벽 구간</option>
   </select>
 
+<label for="water_condition">물의 탁도는 어느 정도인가요?</label>
+<select id="water_condition">
+  <option value="선택 없음">선택 없음</option>
+  <option value="초청정">초청정 (0~2 NTU)</option>
+  <option value="청정">청정 (3~10 NTU)</option>
+  <option value="보통">보통 (10~50 NTU)</option>
+  <option value="탁수">탁수 (50~150 NTU)</option>
+  <option value="심한 탁수">심한 탁수 (150~400 NTU)</option>
+  <option value="혼탁">혼탁 (400 NTU 이상)</option>
+  <option value="녹조">녹조 (Algal Bloom)</option>
+  <option value="턴오버">턴오버 (Turnover)</option>
+</select>
+
   <label for="weather">오늘 날씨는 어떤가요?</label>
   <select id="weather">
     <option value="선택 없음">선택 없음</option>
@@ -165,6 +178,18 @@
     <option value="안개">안개</option>
   </select>
 
+<label for="water_temperature">현재 수온은 어느 정도인가요?</label>
+<select id="water_temperature">
+  <option value="선택 없음">선택 없음</option>
+  <option value="0-5">0~5°C(극도로 차가움)</option>
+  <option value="5-10">5~10°C(매우 차가움)</option>
+  <option value="10-15">10~15°C(차가움)</option>
+  <option value="15-20">15~20°C(적정 온도)</option>
+  <option value="20-25">20~25°C(활동 최적 온도)</option>
+  <option value="25-30">25~30°C(다소 따뜻함)</option>
+  <option value="30+">30°C 이상(매우 따뜻함)</option>
+</select>
+
   <label for="wind">바람의 세기는 어느 정도인가요?</label>
   <select id="wind">
     <option value="선택 없음">선택 없음</option>
@@ -174,7 +199,7 @@
     <option value="강한 바람">강한 바람</option>
   </select>
 
-  <label for="depth">수심은?</label>
+  <label for="depth">공략하는 포인트의 수심은?</label>
   <select id="depth">
     <option value="선택 없음">선택 없음</option>
     <option value="1M 미만">1M 미만</option>
@@ -185,15 +210,23 @@
     <option value="10M 이상">10M 이상</option>
   </select>
 
-  <label for="time_of_day">낚시 시간대는?</label>
+<label for="water_level">필드의 현재 수위 정도는?</label>
+<select id="water_level">
+  <option value="선택 없음">선택 없음</option>
+  <option value="정상 수위">정상 수위</option>
+  <option value="낮은 수위">낮은 수위</option>
+  <option value="높은 수위">높은 수위</option>
+</select>
+
+  <label for="time_of_day">낚시하는 시간대는?</label>
   <select id="time_of_day">
     <option value="선택 없음">선택 없음</option>
     <option value="새벽 (04:00 ~ 07:00)">새벽 (04:00 ~ 07:00)</option>
     <option value="아침 (07:00 ~ 10:00)">아침 (07:00 ~ 10:00)</option>
     <option value="정오 (10:00 ~ 13:00)">정오 (10:00 ~ 13:00)</option>
     <option value="낮 (13:00 ~ 16:00)">낮 (13:00 ~ 16:00)</option>
-    <option value="저녁 (16:00 ~ 19:00)">저녁 (16:00 ~ 19:00)</option>
-    <option value="밤 (19:00 ~ 04:00)">밤 (19:00 ~ 04:00)</option>
+    <option value="저녁 (16:00 ~ 19:00)">오후 (16:00 ~ 19:00)</option>
+    <option value="밤 (19:00 ~ 04:00)">저녁 (19:00 ~ 04:00)</option>
   </select>
 
   <button onclick="getFishingAdvice()">검색 결과 확인하기</button>
@@ -210,16 +243,22 @@ function getFishingAdvice() {
   const season = document.getElementById('season').value;
   const terrain = document.getElementById('terrain').value;
   const weather = document.getElementById('weather').value;
+  const waterTemperature = document.getElementById('water_temperature').value;
   const wind = document.getElementById('wind').value;
   const depth = document.getElementById('depth').value;
+  const waterLevel = document.getElementById('water_level').value;
   const timeOfDay = document.getElementById('time_of_day').value;
+  const waterCondition = document.getElementById('water_condition').value;
 
   let advice = `<strong>📌낚시 상황</strong><br>`;
   if (season !== '선택 없음') advice += `- 계절: ${season}<br>`;
   if (terrain !== '선택 없음') advice += `- 지형: ${terrain}<br>`;
+  if (waterCondition !== '선택 없음') advice += `- 물의 상태: ${waterCondition}<br>`;
   if (weather !== '선택 없음') advice += `- 날씨: ${weather}<br>`;
+  if (waterTemperature !== '선택 없음') advice += `- 수온: ${waterTemperature}<br>`;
   if (wind !== '선택 없음') advice += `- 바람: ${wind}<br>`;
   if (depth !== '선택 없음') advice += `- 수심: ${depth}<br>`;
+  if (waterLevel !== '선택 없음') advice += `- 수위: ${waterLevel}<br>`;
   if (timeOfDay !== '선택 없음') advice += `- 시간대: ${timeOfDay}<br>`;
 
   let combinedAdvice = `
@@ -227,10 +266,13 @@ function getFishingAdvice() {
     낚시에는 답이 없답니다. 결과 값에 따라 본인이 원하는 방식을 선택하세요!<br><br>
     ${getSeasonAdvice(season)} 
     ${getTerrainAdvice(terrain)} 
+    ${getWaterConditionAdvice(waterCondition)}
     ${getWeatherAdvice(weather)} 
+    ${getWaterTemperatureAdvice(waterTemperature)}
     ${getWindAdvice(wind)} 
-    ${getDepthAdvice(depth)} 
-    ${getTimeOfDayAdvice(timeOfDay)} 
+    ${getDepthAdvice(depth)}
+    ${getWaterLevelAdvice(waterLevel)} 
+    ${getTimeOfDayAdvice(timeOfDay)}
   `;
 
   document.getElementById('advice').innerHTML = advice + combinedAdvice;
@@ -341,6 +383,29 @@ default:
   }
 }
 
+function getWaterConditionAdvice(waterCondition) {
+  switch (waterCondition) {
+    case '초청정': 
+      return `💧 <strong>초청정</strong> - 시야가 좋기 때문에 배스의 경계심이 높습니다. 자연스러운 색상의 와키 리그와 드롭샷 리그를 사용하며, 천천히 리트리브 해야 합니다.<br><br>`;
+    case '청정': 
+      return `💧 <strong>청정</strong> - 물이 맑으므로 배스의 경계심이 다소 높습니다. 자연색의 루어를 사용하고 느리게 운용하세요.<br><br>`;
+    case '보통': 
+      return `💧 <strong>보통</strong> - 시야가 약간 제한되어 있으며, 밝은 색상과 자연스러운 진동의 루어가 효과적입니다.<br><br>`;
+    case '탁수': 
+      return `💧 <strong>탁수</strong> - 물이 뿌옇기 때문에 강한 진동의 바이브레이션 루어와 차트루스 같은 밝은 색상을 사용하세요.<br><br>`;
+    case '심한 탁수': 
+      return `💧 <strong>심한 탁수</strong> - 시야가 매우 제한되며, 강한 진동과 소리를 내는 루어가 필수입니다. 바이브레이션과 크랭크베이트가 추천됩니다.<br><br>`;
+    case '혼탁': 
+      return `💧 <strong>혼탁</strong> - 물이 매우 탁해 배스의 시각 인식이 거의 불가능합니다. 바이브레이션, 메탈 바이브와 같은 강한 진동 루어를 사용하세요.<br><br>`;
+    case '녹조': 
+      return `💧 <strong>녹조</strong> - 플랑크톤으로 인해 물이 녹색으로 변합니다. 배스의 시야가 제한되므로, 크랭크베이트와 스피너베이트를 사용해 강한 진동으로 자극하세요.<br><br>`;
+    case '턴오버': 
+      return `💧 <strong>턴오버</strong> - 수온이 역전되면서 물이 섞입니다. 물속이 뿌옇고 산소 농도가 낮아지므로, 바닥층의 배스를 공략하기 위해 메탈 바이브나 드롭샷 리그를 사용하세요.<br><br>`;
+    default: 
+      return `<span style="color: red;">💧 물의 상태에 대한 선택이 없습니다.<br></span>`;
+  }
+}
+
 function getWeatherAdvice(weather) {
   switch (weather) {
     case '맑음': 
@@ -365,6 +430,27 @@ function getWeatherAdvice(weather) {
 
     default: 
       return '<span style="color: red;">❄️ 날씨에 대한 선택이 없습니다.<br></span>';
+  }
+}
+
+function getWaterTemperatureAdvice(waterTemperature) {
+  switch (waterTemperature) {
+    case '0-5':
+      return `🌡️ <strong>0~5°C</strong> - 배스의 활동성이 낮으므로 바닥층에 머무는 경우가 많습니다. 드롭샷 리그와 메탈 바이브로 바닥을 공략하세요.<br><br>`;
+    case '5-10':
+      return `🌡️ <strong>5~10°C</strong> - 배스의 움직임이 서서히 증가합니다. 깊은 곳에 머무는 배스를 공략하는 것이 좋습니다.<br><br>`;
+    case '10-15':
+      return `🌡️ <strong>10~15°C</strong> - 봄의 시작으로 배스의 활동성이 증가합니다. 얕은 수심의 은신처를 공략하는 것이 효과적입니다.<br><br>`;
+    case '15-20':
+      return `🌡️ <strong>15~20°C</strong> - 산란 시기입니다. 얕은 수초 지역을 집중 공략하고 와키 리그와 프리 리그를 사용하세요.<br><br>`;
+    case '20-25':
+      return `🌡️ <strong>20~25°C</strong> - 배스의 활동성이 최고조에 이릅니다. 다양한 루어로 중층과 표층을 공략할 수 있습니다.<br><br>`;
+    case '25-30':
+      return `🌡️ <strong>25~30°C</strong> - 수온이 높아 배스가 깊은 곳이나 그늘로 피신합니다. 드롭샷 리그로 깊은 곳을 공략하세요.<br><br>`;
+    case '30+':
+      return `🌡️ <strong>30°C 이상</strong> - 수온이 너무 높아 배스의 피딩이 줄어듭니다. 깊은 수심의 그늘 구역을 공략하세요.<br><br>`;
+    default:
+      return `<span style="color: red;">🌡️ 수온에 대한 선택이 없습니다.<br></span>`;
   }
 }
 
@@ -436,6 +522,18 @@ function getDepthAdvice(depth) {
   }
 }
 
+function getWaterLevelAdvice(waterLevel) {
+  switch (waterLevel) {
+    case '정상 수위':
+      return `➖ <strong>정상 수위</strong> - 배스는 평소와 같은 피딩 패턴을 보입니다. 지형과 수초 밀집대 근처를 공략하는 것이 좋습니다.<br><br>`;
+    case '낮은 수위':
+      return `📉 <strong>낮은 수위</strong> - 물골, 드러난 구조물 주변을 공략해야 합니다. 배스는 깊은 수심으로 이동하는 경향이 있습니다.<br><br>`;
+    case '높은 수위':
+      return `📈 <strong>높은 수위</strong> - 수몰된 나무, 수몰된 풀숲 근처를 공략하세요. 와키 리그와 프리 리그를 사용해 수몰 구조물 사이를 탐색하는 것이 좋습니다.<br><br>`;
+    default:
+      return `<span style="color: red;">🌊 수위에 대한 선택이 없습니다.<br></span>`;
+  }
+}
 
 function getTimeOfDayAdvice(timeOfDay) {
   switch (timeOfDay) {
