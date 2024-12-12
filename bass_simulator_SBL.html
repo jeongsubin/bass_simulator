@@ -79,9 +79,8 @@
 <body>
 
 <h2 style="
-  font-size: 2.5rem; 
+  font-size: 2rem; 
   color: #2c3e50; 
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2); 
   text-align: center; 
   font-weight: bold;
 ">
@@ -101,7 +100,14 @@
     color: #16a085; 
     font-weight: bold;
   ">
-    제작: <span style="color: #16a085;">응삼이아빠</span>
+    제작: 
+    <a href="https://open.kakao.com/o/gP6uk0Xg" target="_blank" style="
+      color: #16a085; 
+      text-decoration: underline; 
+      font-weight: bold;
+    ">
+      응삼이 아빠
+    </a>
   </span>
 
   <span style="
@@ -114,12 +120,11 @@
 </div>
 
 
-
-
 <div class="container">
 
   <label for="season">현재 계절은?</label>
   <select id="season">
+    <option value="선택 없음">선택 없음</option>
     <option value="초봄">초봄</option>
     <option value="봄">봄</option>
     <option value="늦봄">늦봄</option>
@@ -136,6 +141,7 @@
 
   <label for="terrain">어느 지형으로 낚시를 가나요?</label>
   <select id="terrain">
+    <option value="선택 없음">선택 없음</option>
     <option value="수초 밀집대 (갈대, 부유초)">수초 밀집대 (갈대, 부유초)</option>
     <option value="수초 밀집대 (침수초)">수초 밀집대 (침수초)</option>
     <option value="바닥 자갈 지형">바닥 자갈 지형</option>
@@ -151,6 +157,7 @@
 
   <label for="weather">오늘 날씨는 어떤가요?</label>
   <select id="weather">
+    <option value="선택 없음">선택 없음</option>
     <option value="맑음">맑음</option>
     <option value="흐림">흐림</option>
     <option value="비">비</option>
@@ -160,6 +167,7 @@
 
   <label for="wind">바람의 세기는 어느 정도인가요?</label>
   <select id="wind">
+    <option value="선택 없음">선택 없음</option>
     <option value="바람 없음">바람 없음</option>
     <option value="약한 바람">약한 바람</option>
     <option value="중간 바람">중간 바람</option>
@@ -168,6 +176,7 @@
 
   <label for="depth">수심은?</label>
   <select id="depth">
+    <option value="선택 없음">선택 없음</option>
     <option value="1M 미만">1M 미만</option>
     <option value="1~2M">1~2M</option>
     <option value="2~4M">2~4M</option>
@@ -178,20 +187,21 @@
 
   <label for="time_of_day">낚시 시간대는?</label>
   <select id="time_of_day">
+    <option value="선택 없음">선택 없음</option>
     <option value="새벽 (04:00 ~ 07:00)">새벽 (04:00 ~ 07:00)</option>
     <option value="아침 (07:00 ~ 10:00)">아침 (07:00 ~ 10:00)</option>
-    <option value="낮 (10:00 ~ 13:00)">낮 (10:00 ~ 13:00)</option>
+    <option value="정오 (10:00 ~ 13:00)">정오 (10:00 ~ 13:00)</option>
     <option value="낮 (13:00 ~ 16:00)">낮 (13:00 ~ 16:00)</option>
     <option value="저녁 (16:00 ~ 19:00)">저녁 (16:00 ~ 19:00)</option>
     <option value="밤 (19:00 ~ 04:00)">밤 (19:00 ~ 04:00)</option>
   </select>
 
-  <button onclick="getFishingAdvice()">추천 채비 확인하기</button>
+  <button onclick="getFishingAdvice()">검색 결과 확인하기</button>
 
 </div>
 
 <div id="result" class="container">
-  <h2>🛠️ 추천 채비 & 액션</h2>
+  <h2>추천 채비 & 액션</h2>
   <p id="advice"></p>
 </div>
 
@@ -204,17 +214,17 @@ function getFishingAdvice() {
   const depth = document.getElementById('depth').value;
   const timeOfDay = document.getElementById('time_of_day').value;
 
-  let advice = `<strong> 낚시 상황</strong><br>`;
-  advice += `- 계절: ${season}<br>`;
-  advice += `- 지형: ${terrain}<br>`;
-  advice += `- 날씨: ${weather}<br>`;
-  advice += `- 바람: ${wind}<br>`;
-  advice += `- 수심: ${depth}<br>`;
-  advice += `- 시간대: ${timeOfDay}<br><hr>`;
+  let advice = `<strong>📌낚시 상황</strong><br>`;
+  if (season !== '선택 없음') advice += `- 계절: ${season}<br>`;
+  if (terrain !== '선택 없음') advice += `- 지형: ${terrain}<br>`;
+  if (weather !== '선택 없음') advice += `- 날씨: ${weather}<br>`;
+  if (wind !== '선택 없음') advice += `- 바람: ${wind}<br>`;
+  if (depth !== '선택 없음') advice += `- 수심: ${depth}<br>`;
+  if (timeOfDay !== '선택 없음') advice += `- 시간대: ${timeOfDay}<br>`;
 
   let combinedAdvice = `
-    <strong>📌최종 추천<Br></strong>
-    낚시에는 답이 없답니다. 추천에 따라 본인이 원하는 방식을 선택하세요.<br><br>
+    <br><strong>🗨제작자 한마디<Br></strong>
+    낚시에는 답이 없답니다. 결과 값에 따라 본인이 원하는 방식을 선택하세요!<br><br>
     ${getSeasonAdvice(season)} 
     ${getTerrainAdvice(terrain)} 
     ${getWeatherAdvice(weather)} 
@@ -229,187 +239,247 @@ function getFishingAdvice() {
 function getSeasonAdvice(season) {
   switch (season) {
     case '초봄': 
-      return `🌸 <strong>초봄</strong> - 수온이 낮아 배스의 움직임이 둔하기 때문에 바닥층을 집중 공략해야 합니다. 돌무더기, 나무 그늘 같은 은신처 주변을 천천히 공략하며, 바닥을 끌거나 가벼운 리프트 앤 폴 액션이 효과적입니다.<br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7초 스테이 유지</span><br>`;
-      
+      return `🌸 <strong>초봄</strong> - 수온이 낮아 배스의 움직임이 둔하기 때문에 바닥층을 집중 공략해야 합니다. 돌무더기, 나무 그늘 같은 은신처 주변을 천천히 공략하며, 바닥을 끌거나 가벼운 리프트 앤 폴 액션이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7초 스테이 유지</span><br><br>`;
+
     case '봄': 
-      return `🌿 <strong>봄</strong> - 수온이 상승하며 배스의 활동이 활발해지기 시작합니다. 수초나 산란장이 될만한 얕은 구역을 노리며, 리프트 앤 폴보다는 천천히 끌어주는 방식이 효과적입니다.<br><span style="color: gray;"><strong>팁</strong> - 폴링 후 4초 스테이 유지</span><br>`;
+      return `🌿 <strong>봄</strong> - 수온이 상승하며 배스의 활동이 활발해지기 시작합니다. 수초나 산란장이 될만한 얕은 구역을 노리며, 리프트 앤 폴보다는 천천히 끌어주는 방식이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 4초 스테이 유지</span><br><br>`;
 
     case '늦봄': 
       return `🌞 <strong>늦봄</strong> - 산란 직후 회복기인 배스를 노리기 위해 얕은 수심의 수초 주변과 섈로우 지역을 공략합니다. 회복 중인 배스는 공격성이 강하지 않으므로 천천히 자연스러운 액션을 유지하는 것이 좋습니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br>`;
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br><br>`;
 
     case '초여름': 
-      return `🔥 <strong>초여름</strong> - 수온이 상승해 배스의 피딩 패턴이 왕성해지는 시기입니다. 넓은 구역을 탐색하며 중층과 얕은 수심의 구조물, 피딩존을 빠른 속도로 공략하는 것이 효과적입니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br>`;
+      return `🔥 <strong>초여름</strong> - 수온이 상승해 배스의 피딩 패턴이 왕성해지는 시기입니다. 넓은 구역을 탐색하며 중층과 얕은 수심의 구조물, 피딩구간을 빠른 속도로 공략하는 것이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br><br>`;
 
     case '여름': 
-      return `🥵 <strong>여름</strong> - 더운 날씨로 인해 배스가 그늘진 피딩존에 모이기 쉽습니다. 피딩존과 급격한 수심 변화가 있는 구간을 매우 빠른 속도로 공략하며 공격성을 유도하는 것이 핵심입니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 1~2초 스테이 유지</span><br>`;
+      return `🥵 <strong>여름</strong> - 더운 날씨로 인해 배스가 그늘진 구간에 모이기 쉽습니다. 급격한 수심 변화가 있는 구간을 매우 빠른 속도로 공략하며 공격성을 유도하는 것이 핵심입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 1~2초 스테이 유지</span><br><br>`;
 
     case '늦여름': 
       return `🍂 <strong>늦여름</strong> - 수온이 약간 떨어지며 배스의 위치가 깊은 수심으로 이동하는 경향이 있습니다. 수중 구조물과 급경사 지역을 중점적으로 공략하며 천천히 운용하는 것이 효과적입니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br>`;
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3초 스테이 유지</span><br><br>`;
 
     case '초가을': 
-      return `🍁 <strong>초가을</strong> - 배스의 피딩이 활발해지는 시기로, 피딩존을 빠른 속도로 공략합니다. 얕은 수심의 피딩존과 섈로우 지역을 빠르게 탐색하며 루어의 존재감을 강하게 어필하는 것이 좋습니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br>`;
+      return `🍁 <strong>초가을</strong> - 배스의 먹이 활동이 활발해지는 시기로, 피딩 구간을 빠른 속도로 공략합니다. 얕은 수심의 피딩 구간과 섈로우 지역을 빠르게 탐색하며 루어의 존재감을 강하게 어필하는 것이 좋습니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 2초 스테이 유지</span><br><br>`;
 
     case '가을': 
-      return `🍂 <strong>가을</strong> - 배스가 먹이활동에 집중하는 피딩 시즌으로, 피딩존 근처의 변화 지형을 공략하는 것이 핵심입니다. 지형 변화를 활용해 자연스러운 폴링 액션을 유지하며 중간 속도로 운용합니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3~4초 스테이 유지</span><br>`;
+      return `🍂 <strong>가을</strong> - 배스가 먹이활동에 집중하는 시즌으로, 피딩 구간 근처의 브레이크 라인 지형을 공략하는 것이 핵심입니다. 지형 변화를 활용해 자연스러운 폴링 액션을 유지하며 중간 속도로 운용합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 3~4초 스테이 유지</span><br><br>`;
 
     case '늦가을': 
-      return `🍁 <strong>늦가을</strong> - 수온이 급격히 떨어지면서 배스가 바닥층으로 이동합니다. 얕은 곳보다는 수심이 깊은 바닥 구간을 느린 속도로 공략하며, 자연스러운 바닥 끌기 액션이 효과적입니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7~10초 스테이 유지</span><br>`;
+      return `🍁 <strong>늦가을</strong> - 수온이 급격히 떨어지면서 배스가 바닥층으로 이동합니다. 얕은 곳보다는 수심이 깊은 바닥 구간을 느린 속도로 공략하며, 자연스러운 바닥을 끄는 액션이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 7~10초 스테이 유지</span><br><br>`;
 
     case '초겨울': 
       return `❄️ <strong>초겨울</strong> - 수온 하락으로 인해 배스의 활동이 둔화됩니다. 바닥에 머무는 배스를 공략하기 위해 매우 느린 속도로 바닥을 끌거나 리프트 앤 폴 액션을 유지하는 것이 좋습니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 스테이 유지</span><br>`;
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 이상 스테이 유지</span><br><br>`;
 
     case '겨울': 
       return `☃️ <strong>겨울</strong> - 수온이 최저점에 이르러 배스의 활동이 극도로 둔화됩니다. 깊은 수심의 바닥을 중심으로 공략하며, 루어를 거의 움직이지 않고 긴 스테이를 유지하는 것이 효과적입니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 15초 스테이 유지</span><br>`;
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 15초 이상 스테이 유지</span><br><br>`;
 
     case '늦겨울': 
-      return `❄️ <strong>늦겨울</strong> - 수온이 약간 상승하면서 중층과 바닥 사이를 오가는 배스의 움직임이 포착됩니다. 리프트 앤 폴 액션으로 중층을 탐색한 후 바닥으로 전환하여 공략합니다.
-              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 스테이 유지</span><br>`;
+      return `❄️ <strong>늦겨울</strong> - 수온이 약간 상승하면서 중층과 바닥 사이를 오가는 배스의 움직임이 나타됩니다. 리프트 앤 폴 액션으로 중층을 탐색한 후 바닥으로 전환하여 공략합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 폴링 후 10초 스테이 유지</span><br><br>`;
     default: 
-      return '';
+      return '<span style="color: red;">🌞 계절에 대한 선택이 없습니다.<br></span>';
   }
 }
 
 function getTerrainAdvice(terrain) {
   switch (terrain) {
-    case '수초 밀집대 (갈대, 부유초)': 
-      return `🌿 <strong>수초 밀집대</strong> - 와키 리그, 자연스러운 폴링 액션 권장<br>`;
-    case '수초 밀집대 (침수초)': 
-      return `🌿 <strong>침수초</strong> - 프리 리그, 중층 및 바닥 공략<br>`;
-    case '바닥 자갈 지형': 
-      return `⛰️ <strong>바닥 자갈</strong> - 텍사스 리그, 바닥 긁기 액션 권장<br>`;
-    case '바닥 암반 지형': 
-      return `⛰️ <strong>바닥 암반</strong> - 드롭샷 리그, 바닥 공략에 집중<br>`;
-    case '바닥 뻘 지형': 
-      return `🟫 <strong>바닥 뻘</strong> - 프리 리그, 바닥에 파묻히지 않도록 유의<br>`;
-    case '유속이 빠른 지대': 
-      return `🌊 <strong>유속 빠름</strong> - 바이브레이션 루어, 빠른 리트리브 권장<br>`;
-    case '갈수기에 바닥이 노출된 지형': 
-      return `🌊 <strong>갈수기</strong> - 스피너베이트, 넓은 탐색이 유리<br>`;
-    case '수몰 구조물 (침수 나무, 폐구조물)': 
-      return `🏚️ <strong>수몰 구조물</strong> - 프리 리그, 구조물 근처 공략<br>`;
-    case '저수지 물골과 브레이크 라인': 
-      return `🌊 <strong>브레이크 라인</strong> - 드롭샷 리그, 중층과 바닥 공략<br>`;
-    case '댐 직벽 구간': 
-      return `🏞️ <strong>댐 직벽</strong> - 메탈 바이브, 직벽 주변 탐색<br>`;
-    default: 
-      return '';
+case '수초 밀집대 (갈대, 부유초)': 
+  return `🌿 <strong>수초 밀집대 (갈대, 부유초)</strong> - 배스가 은신하기 좋은 곳으로, 수초 틈새에 루어를 자연스럽게 떨어뜨리는 것이 핵심입니다. 와키 리그나 네코 리그를 사용해 천천히 침투시키고, 폴링 후 스테이를 충분히 유지해야 합니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 수초 사이에 루어가 자연스럽게 흘러들어가도록 캐스팅</span><br><br>`;
+
+case '수초 밀집대 (침수초)': 
+  return `🌿 <strong>수초 밀집대 (침수초)</strong> - 물속에 잠긴 수초 구간으로, 배스가 숨어있기 좋은 은신처입니다. 프리 리그나 플리핑 방식으로 수초 사이를 공략하며, 리프트 앤 폴 액션으로 유도하는 것이 효과적입니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 침수초를 피하면서 틈새를 공략</span><br><br>`;
+
+case '바닥 자갈 지형': 
+  return `⛰️ <strong>바닥 자갈 지형</strong> - 자갈이 깔린 바닥은 배스의 은신처이자 사냥터입니다. 텍사스 리그를 사용해 바닥을 끌며 천천히 리트리브하는 것이 좋습니다. 자갈에 부딪히는 느낌을 잘 감지해야 합니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 바닥을 긁으면서 천천히 리트리브</span><br><br>`;
+
+case '바닥 암반 지형': 
+  return `⛰️ <strong>바닥 암반 지형</strong> - 돌출된 바위가 많은 하드 바텀 구간으로, 배스가 몸을 숨기기 좋은 곳입니다. 드롭샷 리그로 바위의 틈새와 돌출부 주변을 공략하는 것이 효과적입니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 돌출된 부분을 중심으로 바닥과 중층을 번갈아 탐색</span><br><br>`;
+
+case '바닥 뻘 지형': 
+  return `🟫 <strong>뻘 바닥 지형</strong> - 바닥이 뻘로 이루어진 구간에서는 싱커나 루어가 파묻히기 쉽습니다. 프리 리그나 스플릿샷 리그를 활용해 바닥에 붙지 않게 천천히 끌어주는 것이 좋습니다. 리프트 앤 폴 방식으로 자연스러운 액션을 연출하는 것이 효과적입니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 루어가 뻘에 파묻히지 않도록 컨트롤</span><br><br>`;
+
+case '유속이 약한 지대': 
+  return `🌊 <strong>유속이 약한 지대</strong> - 유속이 느린 지역은 배스가 머물면서 쉬어가는 포인트로 자주 활용됩니다. 프리 리그와 드롭샷 리그가 효과적이며, 루어의 속도를 천천히 유지하면서 자연스러운 폴링 액션을 연출하는 것이 좋습니다. 유속이 약한 구간에서는 배스의 입질이 미세하게 들어올 수 있어 라인 텐션을 유지하는 것이 중요합니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 프리 리그로 자연스럽게 바닥에 안착시키고 긴 스테이 유지</span><br><br>`;
+
+case '유속이 빠른 지대': 
+  return `🌊 <strong>유속 빠른 지대</strong> - 유속이 빠른 구간은 배스의 활성도가 높은 곳입니다. 바이브레이션 루어나 크랭크베이트로 빠르게 탐색하며, 짧은 폴링 후 리트리브 속도를 유지하는 것이 좋습니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 빠른 리트리브로 활성 배스를 유도</span><br><br>`;
+
+case '갈수기에 바닥이 노출된 지형': 
+  return `🌊 <strong>갈수기 노출 지형</strong> - 수위가 낮아지면서 바닥이 드러난 구간으로, 평소에 보이지 않던 스트럭처(돌, 폐구조물 등)가 노출됩니다. 스피너베이트로 넓은 범위를 빠르게 탐색하며, 노출된 돌무더기나 구조물 주변을 집중 공략합니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 돌무더기나 구조물 중심으로 탐색</span><br><br>`;
+
+case '수몰 구조물 (침수 나무, 폐구조물)': 
+  return `🏚️ <strong>수몰 구조물</strong> - 물속에 잠긴 스트럭처는 덩어리 배스의 은신처로 유명합니다. 프리 리그와 플리핑 기법으로 구조물에 붙여서 루어를 자연스럽게 폴링시키는 것이 핵심입니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 구조물의 그림자와 틈새를 공략</span><br><br>`;
+
+case '저수지 물골과 브레이크 라인': 
+  return `🌊 <strong>물골과 브레이크 라인</strong> - 물골과 브레이크 라인은 배스의 회유 경로로, 배스가 자주 모이는 포인트입니다. 드롭샷 리그를 사용해 바닥과 중층을 공략하며, 물골의 경계 부분에 루어를 떨어뜨리는 것이 효과적입니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 물골의 경계를 중심으로 천천히 탐색</span><br><br>`;
+
+case '댐 직벽 구간': 
+  return `🏞️ <strong>댐 직벽</strong> - 직벽 구간은 수심 변화가 급격해 배스가 머무르기 좋은 곳입니다. 메탈 바이브나 립리스 크랭크베이트를 사용해 폴링과 리프트 앤 폴 액션으로 깊은 수심의 배스를 공략합니다.
+          <br><span style="color: gray;"><strong>팁</strong> - 직벽을 따라 폴링 액션과 리프트 앤 폴로 공략</span><br><br>`;
+default: 
+  return '<span style="color: red;">⛰️ 지형에 대한 선택이 없습니다.<br></span>';
+
   }
 }
 
 function getWeatherAdvice(weather) {
   switch (weather) {
     case '맑음': 
-      return `☀️ <strong>맑음</strong> - 탑워터, 크랭크베이트 권장<br>`;
+      return `☀️ <strong>맑음</strong> - 햇빛으로 인해 수면이 밝아지므로 배스의 경계심이 높아지는 상황입니다. 탑워터 루어로 수면을 자극하거나, 크랭크베이트로 광범위한 탐색이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 포퍼, 펜슬베이트, 크랭크베이트</span><br><br>`;
+
     case '흐림': 
-      return `☁️ <strong>흐림</strong> - 바이브레이션 루어, 자연스러운 액션 필요<br>`;
+      return `☁️ <strong>흐림</strong> - 흐린 날씨에는 광량이 낮아져 배스의 경계심이 줄어듭니다. 배스의 이동 범위가 넓어지는 만큼, 바이브레이션 루어로 빠르게 넓은 구역을 탐색하거나, 소프트베이트로 자연스러운 액션을 연출합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 바이브레이션, 미노우, 소프트베이트</span><br><br>`;
+
     case '비': 
-      return `🌧️ <strong>비</strong> - 강한 진동 루어, 바이브레이션 루어 추천<br>`;
+      return `🌧️ <strong>비</strong> - 빗방울 소리로 인해 수중 소음이 커지는 상황으로, 강한 진동과 소음을 내는 루어가 효과적입니다. 바이브레이션 루어나 크랭크베이트를 활용해 배스의 시각보다 청각을 자극하는 전략이 유효합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 바이브레이션, 립리스 크랭크베이트, 메탈 바이브</span><br><br>`;
+
     case '눈': 
-      return `❄️ <strong>눈</strong> - 메탈 바이브, 바닥 공략<br>`;
+      return `❄️ <strong>눈</strong> - 수온이 급격히 떨어지면서 배스의 활성이 크게 감소합니다. 바닥에 붙어 있는 배스를 공략해야 하며, 메탈 바이브나 스푼을 사용해 바닥층을 천천히 탐색하는 것이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 메탈 바이브, 스푼, 드롭샷 리그</span><br><br>`;
+
     case '안개': 
-      return `🌫️ <strong>안개</strong> - 강한 진동 루어, 바이브레이션 루어 권장<br>`;
+      return `🌫️ <strong>안개</strong> - 시야가 제한되는 상황으로, 배스의 시각적 인식이 낮아집니다. 진동과 소음을 활용해 배스의 청각과 측선 반응을 유도하는 것이 중요합니다. 바이브레이션 루어나 스피너베이트가 유효합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 바이브레이션, 스피너베이트, 립리스 크랭크베이트</span><br><br>`;
+
     default: 
-      return '';
+      return '<span style="color: red;">❄️ 날씨에 대한 선택이 없습니다.<br></span>';
   }
 }
+
 
 function getWindAdvice(wind) {
   switch (wind) {
     case '바람 없음': 
-      return `💨 <strong>바람 없음</strong> - 자연스러운 액션 사용<br>`;
+      return `🌤️ <strong>바람 없음</strong> - 수면이 잔잔하여 배스의 경계심이 높아지는 상황. 자연스러운 액션이 필수로, 섬세한 컨트롤이 가능한 와키 리그와 프리 리그가 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 와키 리그, 프리 리그, 드롭샷</span><br><br>`;
+
     case '약한 바람': 
-      return `💨 <strong>약한 바람</strong> - 리프트 앤 폴 액션 권장<br>`;
+      return `🍃 <strong>약한 바람</strong> - 수면에 작은 파장이 발생하여 배스의 경계심이 줄어드는 상황. 리프트 앤 폴 액션을 활용해 중층과 바닥을 천천히 탐색하는 것이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 프리 리그, 텍사스 리그, 네코 리그</span><br><br>`;
+
     case '중간 바람': 
-      return `💨 <strong>중간 바람</strong> - 드롭샷 리그, 바닥 공략<br>`;
+      return `🌬️ <strong>중간 바람</strong> - 수면이 일렁이면서 시야 확보가 어려워지는 상황. 배스가 바닥에 머물 가능성이 높아지므로, 드롭샷 리그로 바닥층을 공략하는 것이 유효합니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 드롭샷 리그, 프리 리그, 메탈 바이브</span><br><br>`;
+
     case '강한 바람': 
-      return `💨 <strong>강한 바람</strong> - 크랭크베이트, 빠른 리트리브 권장<br>`;
+      return `💨 <strong>강한 바람</strong> - 수면이 거칠어지며 탁수가 발생하는 상황으로, 배스의 시각 인식이 떨어집니다. 크랭크베이트나 바이브레이션 루어로 강한 진동과 소리로 배스의 청각을 자극하는 것이 효과적입니다.
+              <br><span style="color: gray;"><strong>팁</strong> - 크랭크베이트, 바이브레이션, 립리스 크랭크</span><br><br>`;
+
     default: 
-      return '';
+      return '<span style="color: red;">💨 바람에 대한 선택이 없습니다.<br></span>';
   }
 }
+
 
 function getDepthAdvice(depth) {
   switch (depth) {
     case '1M 미만': 
       return `
-        🌊 <strong>수심 1M 미만</strong> - 느린 속도 운용 (폴링 5~7초 스테이), 탑워터 루어·와키 리그로 자연스러운 폴링 액션 연출. 표층 배스는 소리에 민감하므로 소음을 줄이고 천천히 액션 유지.<br>
+        🌊 <strong>수심 1M 미만</strong> - 얕은 수심으로 배스의 경계심이 높아지는 구간입니다. 탑워터 루어로 수면 자극을 주거나, 와키 리그로 천천히 침투시키는 방식이 효과적입니다. 액션은 과하지 않게 유지하며, 불필요한 소음을 줄이는 것이 핵심입니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 포퍼, 펜슬 베이트, 와키 리그</span><br><br>
       `;
 
     case '1~2M': 
       return `
-        🌊 <strong>수심 1~2M</strong> - 중간 속도 운용 (폴링 3~5초 스테이), 프리 리그·네코 리그로 얕은 중층 공략. 장애물에 걸리지 않도록 주의하며 자연스러운 액션 유지.<br>
+        🌊 <strong>수심 1~2M</strong> - 중층을 공략해야 하는 구간으로, 배스의 활동이 활발한 수심입니다. 프리 리그나 네코 리그로 천천히 떨어뜨리며 장애물 주변을 공략하는 것이 효과적입니다. 액션은 자연스러운 폴링과 느린 리트리브가 적합합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 프리 리그, 네코 리그, 미노우</span><br><br>
       `;
 
     case '2~4M': 
       return `
-        🌊 <strong>수심 2~4M</strong> - 중간 속도 운용 (폴링 4~6초 스테이), 프리리그의 호핑 액션으로 중층까지 공략하고, 드롭샷의 단차로 띄운 바닥층을 노려보세요. 루어 속도를 조절해 자연스러운 움직임 유지.<br>
+        🌊 <strong>수심 2~4M</strong> - 배스의 활동 범위가 넓어지는 구간으로, 중층과 바닥을 번갈아 공략하는 것이 유효합니다. 프리 리그의 호핑 액션이나 드롭샷의 바닥 띄우기 액션으로 배스를 자극할 수 있습니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 프리 리그, 드롭샷 리그, 텍사스 리그</span><br><br>
       `;
 
     case '4~6M': 
       return `
-        🌊 <strong>수심 4~6M</strong> - 중간 속도 운용 (폴링 6~8초 스테이), 메탈 바이브·드롭샷 리그로 중층·바닥 공략. 깊은 수심에선 느린 액션 유지.<br>
+        🌊 <strong>수심 4~6M</strong> - 중심 수심대로, 배스가 중층에서 머무는 구간입니다. 메탈 바이브와 드롭샷 리그로 중층과 바닥을 번갈아 탐색합니다. 수심이 깊어질수록 루어의 속도를 느리게 유지하는 것이 중요합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 메탈 바이브, 드롭샷 리그, 프리 리그</span><br><br>
       `;
 
     case '6~10M': 
       return `
-        🌊 <strong>수심 6~10M</strong> - 느린 속도 운용 (폴링 8~10초 스테이), 메탈 바이브·슬로우 드래깅으로 바닥층 공략. 깊은 수심에선 느린 리트리브와 긴 스테이 필수.<br>
+        🌊 <strong>수심 6~10M</strong> - 수온이 낮아지면서 배스의 활성이 줄어드는 구간입니다. 바닥에 붙어 있는 배스를 공략해야 하며, 메탈 바이브나 슬로우 드래깅으로 바닥을 천천히 끌어주는 방식이 효과적입니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 메탈 바이브, 프리 리그, 슬로우 드래깅</span><br><br>
       `;
 
     case '10M 이상': 
       return `
-        🌊 <strong>수심 10M 이상</strong> - 매우 느린 속도 운용 (폴링 10초+ 스테이), 메탈 바이브·드롭샷 리그로 깊은 바닥층 공략. 낮은 수온·어두운 환경 탓에 배스 반응이 느리므로, 느린 리트리브와 긴 스테이 유지 필수.<br>
+        🌊 <strong>수심 10M 이상</strong> - 수온이 낮고 빛이 닿지 않는 깊은 수심으로, 배스의 반응이 느려집니다. 메탈 바이브와 드롭샷 리그로 바닥을 집중 공략하며, 긴 스테이와 느린 리트리브가 필수적입니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 메탈 바이브, 드롭샷 리그, 슬로우 드래깅</span><br><br>
       `;
 
     default: 
-      return '해당 수심에 대한 정보가 없습니다.<br>';
+      return '<span style="color: red;">🌊 수심에 대한 선택이 없습니다.<br></span>';
   }
 }
+
 
 function getTimeOfDayAdvice(timeOfDay) {
   switch (timeOfDay) {
     case '새벽 (04:00 ~ 07:00)': 
       return `
-        ⏰ <strong>새벽 (04:00 ~ 07:00)</strong> - 빠른 속도로 운용 (폴링 1~2초 스테이), 피딩 활발 시기로 탑워터와 미노우로 표층 공략. 소음 최소화 필수.<br>
+        ⏰ <strong>새벽 (04:00 ~ 07:00)</strong> - 배스의 피딩이 활발한 시간으로, 수면 근처에서의 입질 확률이 높습니다. 탑워터 루어로 수면 자극을 주거나 미노우로 표층을 공략합니다. 소리를 최소화하면서 자연스러운 액션을 유지하는 것이 중요합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 팝퍼, 워킹 베이트, 미노우</span><br><br>
       `;
 
     case '아침 (07:00 ~ 10:00)': 
       return `
-        ⏰ <strong>아침 (07:00 ~ 10:00)</strong> - 중간 속도로 운용 (폴링 3~4초 스테이), 피딩 시간대이므로 드롭샷과 미노우로 중층 및 간간히 표층 공략. 장애물 근처 피딩존 집중 공략.<br>
+        ⏰ <strong>아침 (07:00 ~ 10:00)</strong> - 배스의 피딩 시간이 이어지는 구간으로, 중층과 표층을 공략해야 합니다. 드롭샷 리그로 중층을 탐색하거나 미노우로 빠른 피딩존을 공략합니다. 장애물 근처에 있는 배스를 집중 공략합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 드롭샷 리그, 미노우, 프리 리그</span><br><br>
       `;
 
-    case '낮 (10:00 ~ 13:00)': 
+    case '정오 (10:00 ~ 13:00)': 
       return `
-        ⏰ <strong>낮 (10:00 ~ 13:00)</strong> - 느린 속도로 운용 (폴링 6~8초 스테이), 배스가 깊은 수심에 머무르므로 드롭샷 리그로 바닥층 집중 공략. 낮에는 수온 상승으로 더 깊은 수심 공략 필수.<br>
+        ⏰ <strong>정오 (10:00 ~ 13:00)</strong> - 수온이 상승하고 배스의 활성이 낮아지는 시간대로, 배스는 깊은 수심으로 이동합니다. 드롭샷 리그로 바닥층을 공략하고, 스테이를 길게 유지하여 배스의 반응을 유도합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 드롭샷 리그, 메탈 바이브, 프리 리그</span><br><br>
       `;
 
     case '낮 (13:00 ~ 16:00)': 
       return `
-        ⏰ <strong>낮 (13:00 ~ 16:00)</strong> - 느린 속도로 운용 (폴링 7~10초 스테이), 배스가 깊은 곳에 머무르므로 드롭샷 리그와 지그헤드 리그로 깊은 수심 공략. 피딩이 멈추는 시간대이므로 스테이 시간을 길게 유지.<br>
+        ⏰ <strong>낮 (13:00 ~ 16:00)</strong> - 배스의 활성이 낮고 깊은 수심에 머무르는 시간대입니다. 드롭샷 리그와 지그헤드 리그로 깊은 수심을 공략하며, 스테이 시간을 길게 유지하여 반응을 유도합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 드롭샷 리그, 지그헤드 리그, 메탈 바이브</span><br><br>
       `;
 
     case '저녁 (16:00 ~ 19:00)': 
       return `
-        ⏰ <strong>저녁 (16:00 ~ 19:00)</strong> - 중간 속도로 운용 (폴링 3~5초 스테이), 배스 활동이 증가하는 시간대이므로 미노우와 스피너베이트로 중층·표층을 공략. 피딩존 근처를 빠르게 탐색하는 것이 효과적.<br>
+        ⏰ <strong>저녁 (16:00 ~ 19:00)</strong> - 피딩이 다시 시작되는 시간대로, 배스의 이동이 활발해지는 시간입니다. 미노우로 빠르게 피딩존을 탐색하거나 스피너베이트로 중층을 공략합니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 미노우, 스피너베이트, 바이브레이션</span><br><br>
       `;
 
     case '밤 (19:00 ~ 04:00)': 
       return `
-        ⏰ <strong>밤 (19:00 ~ 04:00)</strong> - 느린 속도로 운용 (폴링 10초 이상 스테이), 배스의 시야가 제한되므로 소리와 진동에 민감. 바이브레이션 루어·크랭크베이트로 강한 소리와 진동을 발생시켜 유인. 블랙 계열·고대비 색상 루어도 효과적.<br>
+        ⏰ <strong>밤 (19:00 ~ 04:00)</strong> - 배스의 시야가 제한되는 시간으로, 소리와 진동에 민감하게 반응합니다. 바이브레이션 루어와 크랭크베이트로 강한 소리와 진동을 유발하여 유인합니다. 어두운 환경에서는 블랙이나 고대비 색상의 루어가 효과적입니다.
+        <br><span style="color: gray;"><strong>팁</strong> - 바이브레이션, 크랭크베이트, 블랙 계열 루어</span><br><br>
       `;
 
     default: 
-      return '해당 시간대에 대한 정보가 없습니다.<br>';
+      return '<span style="color: red;">⏰ 시간대에 대한 선택이 없습니다.<br></span>';
   }
 }
+
 
 </script>
 
