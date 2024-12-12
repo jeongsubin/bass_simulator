@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울 배스 연구소_SBL</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin: 15px 0 5px;
+    text-align: left;
+  }
+
+  select, button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #4cae4c;
+  }
+
+  #result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  .highlight {
+    color: #e63946;
+    font-weight: bold;
+  }
+</style>
+</head>
+
+<body>
+
+<h2 style="
+  font-size: 2.5rem; 
+  color: #2c3e50; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2); 
+  text-align: center; 
+  font-weight: bold;
+">
+  배스 시뮬레이터
+</h2>
+
+<div style="
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  max-width: 600px; 
+  margin: 0 auto 20px auto; 
+  padding: 0 20px;
+">
+  <span style="
+    font-size: 1rem; 
+    color: #16a085; 
+    font-weight: bold;
+  ">
+    제작: <span style="color: #16a085;">응삼이아빠</span>
+  </span>
+
+  <span style="
+    font-size: 1rem; 
+    color: #16a085; 
+    font-weight: bold;
+  ">
+    버전: <span style="color: #16a085;">2024.12.12</span>
+  </span>
+</div>
+
+
+
+
+<div class="container">
+
+  <label for="season">현재 계절은?</label>
+  <select id="season">
+    <option value="초봄">초봄</option>
+    <option value="봄">봄</option>
+    <option value="늦봄">늦봄</option>
+    <option value="초여름">초여름</option>
+    <option value="여름">여름</option>
+    <option value="늦여름">늦여름</option>
+    <option value="초가을">초가을</option>
+    <option value="가을">가을</option>
+    <option value="늦가을">늦가을</option>
+    <option value="초겨울">초겨울</option>
+    <option value="겨울">겨울</option>
+    <option value="늦겨울">늦겨울</option>
+  </select>
+
+  <label for="terrain">어느 지형으로 낚시를 가나요?</label>
+  <select id="terrain">
+    <option value="수초 밀집대 (갈대, 부유초)">수초 밀집대 (갈대, 부유초)</option>
+    <option value="수초 밀집대 (침수초)">수초 밀집대 (침수초)</option>
+    <option value="바닥 자갈 지형">바닥 자갈 지형</option>
+    <option value="바닥 암반 지형">바닥 암반 지형</option>
+    <option value="바닥 뻘 지형">바닥 뻘 지형</option>
+    <option value="유속이 약한 지대">유속이 약한 지대</option>
+    <option value="유속이 빠른 지대">유속이 빠른 지대</option>
+    <option value="갈수기에 바닥이 노출된 지형">갈수기에 바닥이 노출된 지형</option>
+    <option value="수몰 구조물 (침수 나무, 폐구조물)">수몰 구조물 (침수 나무, 폐구조물)</option>
+    <option value="저수지 물골과 브레이크 라인">저수지 물골과 브레이크 라인</option>
+    <option value="댐 직벽 구간">댐 직벽 구간</option>
+  </select>
+
+  <label for="weather">오늘 날씨는 어떤가요?</label>
+  <select id="weather">
+    <option value="맑음">맑음</option>
+    <option value="흐림">흐림</option>
+    <option value="비">비</option>
+    <option value="눈">눈</option>
+    <option value="안개">안개</option>
+  </select>
+
+  <label for="wind">바람의 세기는 어느 정도인가요?</label>
+  <select id="wind">
+    <option value="바람 없음">바람 없음</option>
+    <option value="약한 바람">약한 바람</option>
+    <option value="중간 바람">중간 바람</option>
+    <option value="강한 바람">강한 바람</option>
+  </select>
+
+  <label for="depth">수심은?</label>
+  <select id="depth">
+    <option value="1M 미만">1M 미만</option>
+    <option value="1~2M">1~2M</option>
+    <option value="2~4M">2~4M</option>
+    <option value="4~6M">4~6M</option>
+    <option value="6~10M">6~10M</option>
+    <option value="10M 이상">10M 이상</option>
+  </select>
+
+  <label for="time_of_day">낚시 시간대는?</label>
+  <select id="time_of_day">
+    <option value="새벽 (04:00 ~ 07:00)">새벽 (04:00 ~ 07:00)</option>
+    <option value="아침 (07:00 ~ 10:00)">아침 (07:00 ~ 10:00)</option>
+    <option value="낮 (10:00 ~ 13:00)">낮 (10:00 ~ 13:00)</option>
+    <option value="낮 (13:00 ~ 16:00)">낮 (13:00 ~ 16:00)</option>
+    <option value="저녁 (16:00 ~ 19:00)">저녁 (16:00 ~ 19:00)</option>
+    <option value="밤 (19:00 ~ 04:00)">밤 (19:00 ~ 04:00)</option>
+  </select>
+
+  <button onclick="getFishingAdvice()">추천 채비 확인하기</button>
+
+</div>
+
+<div id="result" class="container">
+  <h2>🛠️ 추천 채비 & 액션</h2>
+  <p id="advice"></p>
+</div>
+
+<script>
+function getFishingAdvice() {
+  const season = document.getElementById('season').value;
+  const terrain = document.getElementById('terrain').value;
+  const weather = document.getElementById('weather').value;
+  const wind = document.getElementById('wind').value;
+  const depth = document.getElementById('depth').value;
+  const timeOfDay = document.getElementById('time_of_day').value;
+
+  let advice = `<strong> 낚시 상황</strong><br>`;
+  advice += `- 계절: ${season}<br>`;
+  advice += `- 지형: ${terrain}<br>`;
+  advice += `- 날씨: ${weather}<br>`;
+  advice += `- 바람: ${wind}<br>`;
+  advice += `- 수심: ${depth}<br>`;
+  advice += `- 시간대: ${timeOfDay}<br><hr>`;
+
+  let combinedAdvice = `
+    <strong>📌최종 추천<Br></strong>
+    낚시에는 답이 없답니다. 추천에 따라 본인이 원하는 방식을 선택하세요.<br><br>
+    ${getSeasonAdvice(season)} 
+    ${getTerrainAdvice(terrain)} 
+    ${getWeatherAdvice(weather)} 
+    ${getWindAdvice(wind)} 
+    ${getDepthAdvice(depth)} 
+    ${getTimeOfDayAdvice(timeOfDay)} 
+  `;
+
+  document.getElementById('advice').innerHTML = advice + combinedAdvice;
+}
+
+function getSeasonAdvice(season) {
+  switch (season) {
+    case '초봄': 
+      return `🌸 <strong>초봄</strong> - 바닥 공략 중심, 느린 속도 (폴링 후 7초 스테이 유지)<br>`;
+    case '봄': 
+      return `🌿 <strong>봄</strong> - 수초 근처 공략, 중간 속도 (폴링 후 4초 스테이 유지)<br>`;
+    case '늦봄': 
+      return `🌞 <strong>늦봄</strong> - 얕은 수심 공략, 중간 속도 (폴링 후 3초 스테이 유지)<br>`;
+    case '초여름': 
+      return `🔥 <strong>초여름</strong> - 넓은 구역 탐색, 빠른 속도 (폴링 후 2초 스테이 유지)<br>`;
+    case '여름': 
+      return `🥵 <strong>여름</strong> - 피딩존 공략, 매우 빠른 속도 (폴링 후 1~2초 스테이 유지)<br>`;
+    case '늦여름': 
+      return `🍂 <strong>늦여름</strong> - 깊은 수심 공략, 중간 속도 (폴링 후 3초 스테이 유지)<br>`;
+    case '초가을': 
+      return `🍁 <strong>초가을</strong> - 피딩존 공략, 빠른 속도 (폴링 후 2초 스테이 유지)<br>`;
+    case '가을': 
+      return `🍂 <strong>가을</strong> - 피딩존 근처 공략, 중간 속도 (폴링 후 3~4초 스테이 유지)<br>`;
+    case '늦가을': 
+      return `🍁 <strong>늦가을</strong> - 바닥 공략, 느린 속도 (폴링 후 7~10초 스테이 유지)<br>`;
+    case '초겨울': 
+      return `❄️ <strong>초겨울</strong> - 바닥 공략, 매우 느린 속도 (폴링 후 10초 스테이 유지)<br>`;
+    case '겨울': 
+      return `☃️ <strong>겨울</strong> - 바닥 공략, 극히 느린 속도 (폴링 후 15초 스테이 유지)<br>`;
+    case '늦겨울': 
+      return `❄️ <strong>늦겨울</strong> - 중층과 바닥 공략, 느린 속도 (폴링 후 10초 스테이 유지)<br>`;
+    default: 
+      return '';
+  }
+}
+
+function getTerrainAdvice(terrain) {
+  switch (terrain) {
+    case '수초 밀집대 (갈대, 부유초)': 
+      return `🌿 <strong>수초 밀집대</strong> - 와키 리그, 자연스러운 폴링 액션 권장<br>`;
+    case '수초 밀집대 (침수초)': 
+      return `🌿 <strong>침수초</strong> - 프리 리그, 중층 및 바닥 공략<br>`;
+    case '바닥 자갈 지형': 
+      return `⛰️ <strong>바닥 자갈</strong> - 텍사스 리그, 바닥 긁기 액션 권장<br>`;
+    case '바닥 암반 지형': 
+      return `⛰️ <strong>바닥 암반</strong> - 드롭샷 리그, 바닥 공략에 집중<br>`;
+    case '바닥 뻘 지형': 
+      return `🟫 <strong>바닥 뻘</strong> - 프리 리그, 바닥에 파묻히지 않도록 유의<br>`;
+    case '유속이 빠른 지대': 
+      return `🌊 <strong>유속 빠름</strong> - 바이브레이션 루어, 빠른 리트리브 권장<br>`;
+    case '갈수기에 바닥이 노출된 지형': 
+      return `🌊 <strong>갈수기</strong> - 스피너베이트, 넓은 탐색이 유리<br>`;
+    case '수몰 구조물 (침수 나무, 폐구조물)': 
+      return `🏚️ <strong>수몰 구조물</strong> - 프리 리그, 구조물 근처 공략<br>`;
+    case '저수지 물골과 브레이크 라인': 
+      return `🌊 <strong>브레이크 라인</strong> - 드롭샷 리그, 중층과 바닥 공략<br>`;
+    case '댐 직벽 구간': 
+      return `🏞️ <strong>댐 직벽</strong> - 메탈 바이브, 직벽 주변 탐색<br>`;
+    default: 
+      return '';
+  }
+}
+
+function getWeatherAdvice(weather) {
+  switch (weather) {
+    case '맑음': 
+      return `☀️ <strong>맑음</strong> - 탑워터, 크랭크베이트 권장<br>`;
+    case '흐림': 
+      return `☁️ <strong>흐림</strong> - 바이브레이션 루어, 자연스러운 액션 필요<br>`;
+    case '비': 
+      return `🌧️ <strong>비</strong> - 강한 진동 루어, 바이브레이션 루어 추천<br>`;
+    case '눈': 
+      return `❄️ <strong>눈</strong> - 메탈 바이브, 바닥 공략<br>`;
+    case '안개': 
+      return `🌫️ <strong>안개</strong> - 강한 진동 루어, 바이브레이션 루어 권장<br>`;
+    default: 
+      return '';
+  }
+}
+
+function getWindAdvice(wind) {
+  switch (wind) {
+    case '바람 없음': 
+      return `💨 <strong>바람 없음</strong> - 자연스러운 액션 사용<br>`;
+    case '약한 바람': 
+      return `💨 <strong>약한 바람</strong> - 리프트 앤 폴 액션 권장<br>`;
+    case '중간 바람': 
+      return `💨 <strong>중간 바람</strong> - 드롭샷 리그, 바닥 공략<br>`;
+    case '강한 바람': 
+      return `💨 <strong>강한 바람</strong> - 크랭크베이트, 빠른 리트리브 권장<br>`;
+    default: 
+      return '';
+  }
+}
+
+function getDepthAdvice(depth) {
+  switch (depth) {
+    case '1M 미만': 
+      return `
+        🌊 <strong>수심 1M 미만</strong> - 느린 속도 운용 (폴링 5~7초 스테이), 탑워터 루어·와키 리그로 자연스러운 폴링 액션 연출. 표층 배스는 소리에 민감하므로 소음을 줄이고 천천히 액션 유지.<br>
+      `;
+
+    case '1~2M': 
+      return `
+        🌊 <strong>수심 1~2M</strong> - 중간 속도 운용 (폴링 3~5초 스테이), 프리 리그·네코 리그로 얕은 중층 공략. 장애물에 걸리지 않도록 주의하며 자연스러운 액션 유지.<br>
+      `;
+
+    case '2~4M': 
+      return `
+        🌊 <strong>수심 2~4M</strong> - 중간 속도 운용 (폴링 4~6초 스테이), 드롭샷·프리 리그로 중층 공략. 루어 속도를 조절해 자연스러운 움직임 유지.<br>
+      `;
+
+    case '4~6M': 
+      return `
+        🌊 <strong>수심 4~6M</strong> - 중간 속도 운용 (폴링 6~8초 스테이), 메탈 바이브·드롭샷 리그로 중층·바닥 공략. 깊은 수심에선 느린 액션 유지.<br>
+      `;
+
+    case '6~10M': 
+      return `
+        🌊 <strong>수심 6~10M</strong> - 느린 속도 운용 (폴링 8~10초 스테이), 메탈 바이브·슬로우 드래깅으로 바닥층 공략. 깊은 수심에선 느린 리트리브와 긴 스테이 필수.<br>
+      `;
+
+    case '10M 이상': 
+      return `
+        🌊 <strong>수심 10M 이상</strong> - 매우 느린 속도 운용 (폴링 10초+ 스테이), 메탈 바이브·드롭샷 리그로 깊은 바닥층 공략. 낮은 수온·어두운 환경 탓에 배스 반응이 느리므로, 느린 리트리브와 긴 스테이 유지 필수.<br>
+      `;
+
+    default: 
+      return '해당 수심에 대한 정보가 없습니다.<br>';
+  }
+}
+
+function getTimeOfDayAdvice(timeOfDay) {
+  switch (timeOfDay) {
+    case '새벽 (04:00 ~ 07:00)': 
+      return `
+        ⏰ <strong>새벽 (04:00 ~ 07:00)</strong> - 빠른 속도로 운용 (폴링 1~2초 스테이), 피딩 활발 시기로 탑워터와 미노우로 표층 공략. 소음 최소화 필수.<br>
+      `;
+
+    case '아침 (07:00 ~ 10:00)': 
+      return `
+        ⏰ <strong>아침 (07:00 ~ 10:00)</strong> - 중간 속도로 운용 (폴링 3~4초 스테이), 피딩 시간대이므로 드롭샷과 미노우로 중층 및 간간히 표층 공략. 장애물 근처 피딩존 집중 공략.<br>
+      `;
+
+    case '낮 (10:00 ~ 13:00)': 
+      return `
+        ⏰ <strong>낮 (10:00 ~ 13:00)</strong> - 느린 속도로 운용 (폴링 6~8초 스테이), 배스가 깊은 수심에 머무르므로 드롭샷 리그로 바닥층 집중 공략. 낮에는 수온 상승으로 더 깊은 수심 공략 필수.<br>
+      `;
+
+    case '낮 (13:00 ~ 16:00)': 
+      return `
+        ⏰ <strong>낮 (13:00 ~ 16:00)</strong> - 느린 속도로 운용 (폴링 7~10초 스테이), 배스가 깊은 곳에 머무르므로 드롭샷 리그와 지그헤드 리그로 깊은 수심 공략. 피딩이 멈추는 시간대이므로 스테이 시간을 길게 유지.<br>
+      `;
+
+    case '저녁 (16:00 ~ 19:00)': 
+      return `
+        ⏰ <strong>저녁 (16:00 ~ 19:00)</strong> - 중간 속도로 운용 (폴링 3~5초 스테이), 배스 활동이 증가하는 시간대이므로 미노우와 스피너베이트로 중층·표층을 공략. 피딩존 근처를 빠르게 탐색하는 것이 효과적.<br>
+      `;
+
+    case '밤 (19:00 ~ 04:00)': 
+      return `
+        ⏰ <strong>밤 (19:00 ~ 04:00)</strong> - 느린 속도로 운용 (폴링 10초 이상 스테이), 배스의 시야가 제한되므로 소리와 진동에 민감. 바이브레이션 루어·크랭크베이트로 강한 소리와 진동을 발생시켜 유인. 블랙 계열·고대비 색상 루어도 효과적.<br>
+      `;
+
+    default: 
+      return '해당 시간대에 대한 정보가 없습니다.<br>';
+  }
+}
+
+</script>
+
+</body>
+</html>
